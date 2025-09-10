@@ -15,6 +15,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
         rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 
@@ -98,6 +99,15 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
+                    </li>
+                    <!-- profile dashboard -->
+                    <li class="nav-item">
+                        <a
+                            class="nav-link btn btn-primary ms-2 px-3"
+                            href="{{ route('dashboard') }}">
+                            <i class="fas fa-user me-1"></i>
+                            <span data-lang="profile">প্রোফাইল</span>
+                        </a>
                     </li>
                     @endif
                 </ul>

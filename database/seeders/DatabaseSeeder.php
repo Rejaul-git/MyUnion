@@ -13,7 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->call([
+            AdminUserSeeder::class,
+            // অন্য Seeder যদি থাকে যেমন:
+            // ProductSeeder::class,
+        ]);
 
         User::factory()->create([
             'name' => 'Test User',

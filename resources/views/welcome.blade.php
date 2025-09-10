@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 infinity-move animate-fadeIn">
                 <div class="text-center">
                     <img
                         src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 400'><rect width='500' height='400' fill='%23ffffff20'/><circle cx='250' cy='200' r='150' fill='%23ffffff10'/><text x='250' y='200' text-anchor='middle' fill='white' font-size='20'>স্মার্ট সিটি</text></svg>"

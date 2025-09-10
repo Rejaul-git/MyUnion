@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('birth_num')->nullable();
             $table->string('nid')->nullable();
             $table->string('general')->nullable();
-            $table->string('password')->nullable()->change();
+            $table->string('password')->nullable()->default(null);
             $table->string('otp', 6)->nullable();
             $table->timestamp('otp_expires_at')->nullable();
             $table->boolean('is_verified')->default(false);
