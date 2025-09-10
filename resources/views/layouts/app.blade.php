@@ -34,7 +34,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{{ route('home') }}">
                 <i class="fas fa-city me-2"></i>
                 <span data-lang="title">স্মার্ট নাগরিক সেবা</span>
             </a>
@@ -50,7 +50,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#home" data-lang="nav-home">হোম</a>
+                        <a class="nav-link" href="{{ route('home') }}" data-lang="nav-home">হোম</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#services" data-lang="nav-services">সেবাসমূহ</a>
@@ -81,11 +81,31 @@
                     <li class="nav-item">
                         <a
                             class="nav-link btn btn-primary ms-2 px-3"
-                            href="{{ route('register') }}"
-                            onclick="showRegisterModal()">
-                            <i class="fas fa-user-plus me-1"></i>
+                            href="{{ route('register') }}">
+                            <i class=" fas fa-user-plus me-1"></i>
                             <span data-lang="register">রেজিস্টার</span>
                         </a>
+                    </li>
+                    @elseif (Auth::user()->role == 'admin')
+                    <li class="nav-item">
+                        <a
+                            class="nav-link btn btn-primary ms-2 px-3"
+                            href="{{ route('admin.dashboard') }}">
+                            <i class="fas fa-user me-1"></i>
+                            <span data-lang="profile">এডমিন প্রোফাইল</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link btn btn-primary ms-2 px-3"
+                            href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt me-1"></i>
+                            <span data-lang="logout">লগআউট</span>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </li>
                     @else
                     <li class="nav-item">
@@ -104,7 +124,7 @@
                     <li class="nav-item">
                         <a
                             class="nav-link btn btn-primary ms-2 px-3"
-                            href="{{ route('dashboard') }}">
+                            href="{{ route('user.dashboard') }}">
                             <i class="fas fa-user me-1"></i>
                             <span data-lang="profile">প্রোফাইল</span>
                         </a>

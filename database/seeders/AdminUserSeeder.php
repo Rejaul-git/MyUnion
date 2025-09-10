@@ -14,9 +14,19 @@ class AdminUserSeeder extends Seeder
             ['email' => 'rejaulk431@gmail.com'],
             [
                 'name' => 'Admin',
-                'phone' => '01700000000',
+                'phone' => '01783822929',
                 'password' => Hash::make('admin123'),
                 'role' => 'admin',
+                'is_verified' => true,
+            ]
+        );
+        User::updateOrCreate(
+            ['email' => 'rejaulk@gmail.com'],
+            [
+                'name' => 'User',
+                'phone' => '01783822930',
+                'password' => Hash::make('user123'),
+                'role' => 'user',
                 'is_verified' => true,
             ]
         );
