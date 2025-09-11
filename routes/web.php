@@ -12,9 +12,12 @@ Route::get('/', function () {
 // })->middleware('auth')->name('dashboard');
 
 Route::middleware(['auth', 'user'])->group(function () {
-    Route::get('/dashboard', function () {
+    Route::get('/user/dashboard', function () {
         return view('user.dashboard');
     })->name('user.dashboard');
+    Route::get('/user/profile', function () {
+        return view('user.profileform');
+    })->name('user.profile');
 });
 
 // Admin panel route
