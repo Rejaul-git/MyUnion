@@ -2,22 +2,24 @@
 
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileFormController;
+use App\Http\Controllers\UserDashboardController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+Route::get('/cirtificates', function () {
+    return view('certificateList');
+})->name('cirtificates');
 
-// Route::get('/dashboard', function () {
-//     return view('user.dashboard');
-// })->middleware('auth')->name('dashboard');
 
 Route::middleware(['auth', 'user'])->group(function () {
-    Route::get('/user/dashboard', function () {
-        return view('user.dashboard');
-    })->name('user.dashboard');
+    Route::get('/user/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard'); // [UserDashboardController::class,'index'] )
     Route::get('/user/profile', function () {
         return view('user.profileform');
     })->name('user.profile');
+    Route::post('/user/store', [ProfileFormController::class, 'store'])->name('store');
 });
 
 // Admin panel route
@@ -27,11 +29,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     })->name('admin.dashboard');
 });
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
 
 
 

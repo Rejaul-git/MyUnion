@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-auto">
                         <a
-                            href="#"
+                            href="{{ route('cirtificates') }}"
                             class="quick-btn"
                             onclick="openService('certificate')">
                             <i class="fas fa-certificate me-2"></i>
@@ -134,18 +134,20 @@
         <div class="row">
             <!-- সনদপত্র আবেদন -->
             <div class="col-lg-4 col-md-6 mb-4">
-                <div
-                    class="service-card animate-fadeInUp"
-                    onclick="openService('certificate')">
-                    <i class="fas fa-certificate service-icon"></i>
-                    <h4 class="service-title" data-lang="certificate">
-                        সনদপত্র আবেদন
-                    </h4>
-                    <p class="service-description" data-lang="cert-desc">
-                        জন্ম, মৃত্যু, বিবাহ এবং অন্যান্য সনদপত্রের জন্য অনলাইনে আবেদন
-                        করুন
-                    </p>
-                </div>
+                <a href="{{ route('cirtificates') }}" class="text-decoration-none">
+                    <div
+                        class="service-card animate-fadeInUp"
+                        onclick="openService('certificate')">
+                        <i class="fas fa-certificate service-icon"></i>
+                        <h4 class="service-title" data-lang="certificate">
+                            সনদপত্র আবেদন
+                        </h4>
+                        <p class="service-description" data-lang="cert-desc">
+                            জন্ম, মৃত্যু, বিবাহ এবং অন্যান্য সনদপত্রের জন্য অনলাইনে আবেদন
+                            করুন
+                        </p>
+                    </div>
+                </a>
             </div>
 
             <!-- Tax Payment Service -->

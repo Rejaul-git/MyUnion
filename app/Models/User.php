@@ -44,4 +44,9 @@ class User extends Authenticatable
         'date_of_birth' => 'date',
         'password' => 'hashed',
     ];
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
 }

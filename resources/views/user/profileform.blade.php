@@ -284,7 +284,8 @@
 
         <!-- Form Content -->
         <div class="form-content">
-            <form id="profileForm" onsubmit="submitForm(event)">
+            <form id="profileForm" enctype="multipart/form-data" method="post" action="{{ route('store') }}">
+                @csrf
 
                 <!-- General Information Section -->
                 <div class="section-header">
@@ -294,44 +295,44 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">নাম (ইংরেজিতে) <span class="required">*</span></label>
-                        <input type="text" class="form-control" placeholder="উদাহরণ: Abdul Karim" required>
+                        <input type="text" class="form-control" name="name_en" placeholder="উদাহরণ: Abdul Karim" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">নাম (বাংলায়) <span class="required">*</span></label>
-                        <input type="text" class="form-control" placeholder="উদাহরণ: আবদুল করিম" required>
+                        <input type="text" class="form-control" name="name_bn" placeholder="উদাহরণ: আবদুল করিম" required>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">পিতার নাম (ইংরেজিতে) <span class="required">*</span></label>
-                        <input type="text" class="form-control" placeholder="Father's name in English" required>
+                        <input type="text" class="form-control" name="father_name_en" placeholder="Father's name in English" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">পিতার নাম (বাংলায়) <span class="required">*</span></label>
-                        <input type="text" class="form-control" placeholder="পিতার নাম বাংলায়" required>
+                        <input type="text" class="form-control" name="father_name_bn" placeholder="পিতার নাম বাংলায়" required>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">মাতার নাম (ইংরেজিতে) <span class="required">*</span></label>
-                        <input type="text" class="form-control" placeholder="Mother's name in English" required>
+                        <input type="text" class="form-control" name="mother_name_en" placeholder="Mother's name in English" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">মাতার নাম (বাংলায়) <span class="required">*</span></label>
-                        <input type="text" class="form-control" placeholder="মাতার নাম বাংলায়" required>
+                        <input type="text" class="form-control" name="mother_name_bn" placeholder="মাতার নাম বাংলায়" required>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">স্বামী/স্ত্রীর নাম (ইংরেজিতে)</label>
-                        <input type="text" class="form-control" placeholder="Spouse name in English">
+                        <input type="text" class="form-control" name="spouse_name_en" placeholder="Spouse name in English">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">স্বামী/স্ত্রীর নাম (বাংলায়)</label>
-                        <input type="text" class="form-control" placeholder="স্বামী/স্ত্রীর নাম বাংলায়">
+                        <input type="text" class="form-control" name="spouse_name_bn" placeholder="স্বামী/স্ত্রীর নাম বাংলায়">
                     </div>
                 </div>
 
@@ -340,26 +341,26 @@
                         <label class="form-label">ইমেইল</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                            <input type="email" class="form-control" placeholder="example@gmail.com">
+                            <input type="email" class="form-control" name="email" placeholder="example@gmail.com">
                         </div>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label">মোবাইল নম্বর <span class="required">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                            <input type="tel" class="form-control" placeholder="01712345678" required>
+                            <input type="tel" class="form-control" name="mobile" placeholder="01712345678" required>
                         </div>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label">জন্ম তারিখ <span class="required">*</span></label>
-                        <input type="date" class="form-control" required>
+                        <input type="date" class="form-control" name="birth_date" required>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">লিঙ্গ <span class="required">*</span></label>
-                        <select class="form-select" required>
+                        <select class="form-select" name="gender" required>
                             <option value="">লিঙ্গ নির্বাচন করুন</option>
                             <option value="male">পুরুষ</option>
                             <option value="female">মহিলা</option>
@@ -368,7 +369,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">বৈবাহিক অবস্থা</label>
-                        <select class="form-select">
+                        <select class="form-select" name="marital_status">
                             <option value="">বৈবাহিক অবস্থা নির্বাচন করুন</option>
                             <option value="single">অবিবাহিত</option>
                             <option value="married">বিবাহিত</option>
@@ -391,7 +392,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">বিভাগ <span class="required">*</span></label>
-                        <select class="form-select" id="currentDivision" onchange="loadCurrentDistricts()" required>
+                        <select class="form-select" id="currentDivision" name="current_division" required>
                             <option value="">বিভাগ নির্বাচন করুন</option>
                             <option value="dhaka">ঢাকা</option>
                             <option value="chittagong">চট্টগ্রাম</option>
@@ -405,7 +406,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">জেলা <span class="required">*</span></label>
-                        <select class="form-select" id="currentDistrict" onchange="loadCurrentUpazilas()" required>
+                        <select class="form-select" id="currentDistrict" name="current_district" required>
                             <option value="">প্রথমে বিভাগ নির্বাচন করুন</option>
                         </select>
                     </div>
@@ -414,13 +415,13 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">উপজেলা/থানা <span class="required">*</span></label>
-                        <select class="form-select" id="currentUpazila" onchange="loadCurrentUnions()" required>
+                        <select class="form-select" id="currentUpazila" name="current_upazila" required>
                             <option value="">প্রথমে জেলা নির্বাচন করুন</option>
                         </select>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">ইউনিয়ন/পৌরসভা <span class="required">*</span></label>
-                        <select class="form-select" id="currentUnion" required>
+                        <select class="form-select" id="currentUnion" name="current_union" required>
                             <option value="">প্রথমে উপজেলা নির্বাচন করুন</option>
                         </select>
                     </div>
@@ -429,26 +430,26 @@
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label class="form-label">ওয়ার্ড নং <span class="required">*</span></label>
-                        <input type="text" class="form-control" placeholder="উদাহরণ: ০৫" required>
+                        <input type="text" class="form-control" name="current_ward" placeholder="উদাহরণ: ০৫" required>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label">গ্রাম/এলাকা <span class="required">*</span></label>
-                        <input type="text" class="form-control" placeholder="গ্রাম বা এলাকার নাম" required>
+                        <input type="text" class="form-control" name="current_village" placeholder="গ্রাম বা এলাকার নাম" required>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label">ডাকঘর</label>
-                        <input type="text" class="form-control" placeholder="ডাকঘরের নাম">
+                        <input type="text" class="form-control" name="current_post_office" placeholder="ডাকঘরের নাম">
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">পোস্ট কোড</label>
-                        <input type="text" class="form-control" placeholder="উদাহরণ: ১২০০">
+                        <input type="text" class="form-control" name="current_post_code" placeholder="উদাহরণ: ১২০০">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">সম্পূর্ণ ঠিকানা <span class="required">*</span></label>
-                        <textarea class="form-control" rows="2" placeholder="বাড়ি নং, রাস্তা, গ্রাম/এলাকা সহ সম্পূর্ণ ঠিকানা" required></textarea>
+                        <textarea class="form-control" name="current_full_address" rows="2" placeholder="বাড়ি নং, রাস্তা, গ্রাম/এলাকা সহ সম্পূর্ণ ঠিকানা" required></textarea>
                     </div>
                 </div>
 
@@ -458,7 +459,7 @@
                 </div>
 
                 <div class="checkbox-custom">
-                    <input type="checkbox" id="sameAddress" onchange="toggleSameAddress()">
+                    <input type="checkbox" id="sameAddress" name="same_as_current" onchange="toggleSameAddress()">
                     <label for="sameAddress">বর্তমান ঠিকানার সাথে একই</label>
                 </div>
 
@@ -466,7 +467,7 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label">বিভাগ <span class="required">*</span></label>
-                            <select class="form-select" id="permanentDivision" onchange="loadPermanentDistricts()" required>
+                            <select class="form-select" id="permanentDivision" name="permanent_division" required>
                                 <option value="">বিভাগ নির্বাচন করুন</option>
                                 <option value="dhaka">ঢাকা</option>
                                 <option value="chittagong">চট্টগ্রাম</option>
@@ -480,8 +481,8 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">জেলা <span class="required">*</span></label>
-                            <select class="form-select" id="permanentDistrict" onchange="loadPermanentUpazilas()" required>
-                                <option value="">প্রথমে বিভাগ নির্বাচন করুন</option>
+                            <select class="form-select" id="permanentDistrict" name="permanent_district" required>
+                                <option value="">জেলা নির্বাচন করুন</option>
                             </select>
                         </div>
                     </div>
@@ -489,13 +490,13 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label">উপজেলা/থানা <span class="required">*</span></label>
-                            <select class="form-select" id="permanentUpazila" onchange="loadPermanentUnions()" required>
+                            <select class="form-select" id="permanentUpazila" name="permanent_upazila" required>
                                 <option value="">প্রথমে জেলা নির্বাচন করুন</option>
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">ইউনিয়ন/পৌরসভা <span class="required">*</span></label>
-                            <select class="form-select" id="permanentUnion" required>
+                            <select class="form-select" id="permanentUnion" name="permanent_union" required>
                                 <option value="">প্রথমে উপজেলা নির্বাচন করুন</option>
                             </select>
                         </div>
@@ -504,26 +505,26 @@
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <label class="form-label">ওয়ার্ড নং <span class="required">*</span></label>
-                            <input type="text" class="form-control" placeholder="উদাহরণ: ০৫" required>
+                            <input type="text" class="form-control" name="permanent_ward" placeholder="উদাহরণ: ০৫" required>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label class="form-label">গ্রাম/এলাকা <span class="required">*</span></label>
-                            <input type="text" class="form-control" placeholder="গ্রাম বা এলাকার নাম" required>
+                            <input type="text" class="form-control" name="permanent_village" placeholder="গ্রাম বা এলাকার নাম" required>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label class="form-label">ডাকঘর</label>
-                            <input type="text" class="form-control" placeholder="ডাকঘরের নাম">
+                            <input type="text" class="form-control" name="permanent_post_office" placeholder="ডাকঘরের নাম">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label">পোস্ট কোড</label>
-                            <input type="text" class="form-control" placeholder="উদাহরণ: ১২০০">
+                            <input type="text" class="form-control" name="permanent_post_code" placeholder="উদাহরণ: ১২০০">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">সম্পূর্ণ ঠিকানা <span class="required">*</span></label>
-                            <textarea class="form-control" rows="2" placeholder="বাড়ি নং, রাস্তা, গ্রাম/এলাকা সহ সম্পূর্ণ ঠিকানা" required></textarea>
+                            <textarea class="form-control" name="permanent_full_address" rows="2" placeholder="বাড়ি নং, রাস্তা, গ্রাম/এলাকা সহ সম্পূর্ণ ঠিকানা" required></textarea>
                         </div>
                     </div>
                 </div>
@@ -542,7 +543,7 @@
                             </div>
                             <p>ছবি আপলোড করতে ক্লিক করুন</p>
                             <small class="text-muted">JPG, PNG ফরম্যাট, সর্বোচ্চ ২MB</small>
-                            <input type="file" id="photoUpload" accept="image/*" style="display: none;" required>
+                            <input type="file" id="photoUpload" name="photo" accept="image/*" style="display: none;" required>
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
@@ -553,7 +554,7 @@
                             </div>
                             <p>ডকুমেন্ট আপলোড করতে ক্লিক করুন</p>
                             <small class="text-muted">JPG, PNG, PDF ফরম্যাট, সর্বোচ্চ ৫MB</small>
-                            <input type="file" id="nidUpload" accept="image/*,.pdf" style="display: none;" required>
+                            <input type="file" id="nidUpload" name="nid_document" accept="image/*,.pdf" style="display: none;" required>
                         </div>
                     </div>
                 </div>
@@ -574,7 +575,7 @@
 <!-- Bootstrap JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
-<script>
+<!-- <script>
     // Location data
     const locationData = {
         dhaka: {
@@ -620,9 +621,239 @@
             upazilaSelect.appendChild(option);
         }
     });
+</script> -->
+<!-- <script>
+    const locations = {
+        mymensingh: {
+            name: "ময়মনসিংহ",
+            districts: {
+                mymensingh: {
+                    name: "ময়মনসিংহ",
+                    upazilas: {
+                        fulbaria: ["Fulbaria Union 1", "Union 2"],
+                        trishal: ["Trishal Union 1", "Union 2"]
+                    }
+                },
+                netrokona: {
+                    name: "নেত্রকোণা",
+                    upazilas: {
+                        atpara: ["Union 1", "Union 2"],
+                        khaliajuri: ["Union A", "Union B"]
+                    }
+                }
+            }
+        }
+    };
+
+    function loadDistricts() {
+        let division = document.getElementById('currentDivision').value;
+        let districtSelect = document.getElementById('currentDistrict');
+        districtSelect.innerHTML = "<option value=''>জেলা নির্বাচন করুন</option>";
+        if (locations[division]) {
+            for (const d in locations[division].districts) {
+                let opt = document.createElement("option");
+                opt.value = d;
+                opt.textContent = locations[division].districts[d].name;
+                districtSelect.appendChild(opt);
+            }
+        }
+    }
+
+    function loadUpazilas() {
+        let division = document.getElementById('currentDivision').value;
+        let district = document.getElementById('currentDistrict').value;
+        let upazilaSelect = document.getElementById('currentUpazila');
+        upazilaSelect.innerHTML = "<option value=''>উপজেলা নির্বাচন করুন</option>";
+        if (locations[division]?.districts[district]?.upazilas) {
+            for (const u in locations[division].districts[district].upazilas) {
+                let opt = document.createElement("option");
+                opt.value = u;
+                opt.textContent = u;
+                upazilaSelect.appendChild(opt);
+            }
+        }
+    }
+
+    function loadUnions() {
+        let division = document.getElementById('currentDivision').value;
+        let district = document.getElementById('currentDistrict').value;
+        let upazila = document.getElementById('currentUpazila').value;
+        let unionSelect = document.getElementById('currentUnion');
+        unionSelect.innerHTML = "<option value=''>ইউনিয়ন নির্বাচন করুন</option>";
+        let unions = locations[division]?.districts[district]?.upazilas[upazila] || [];
+        unions.forEach(union => {
+            let opt = document.createElement("option");
+            opt.value = union;
+            opt.textContent = union;
+            unionSelect.appendChild(opt);
+        });
+    }
+</script> -->
+
+<script>
+    // Division -> District -> Upazila -> Union data
+    // বর্তমান ঠিকানা
+    const bdData = {
+        dhaka: {
+            name: "ঢাকা",
+            districts: {
+                dhaka: {
+                    name: "ঢাকা",
+                    upazilas: {
+                        dhanmondi: {
+                            name: "ধানমন্ডি",
+                            unions: ["ইউনিয়ন-১", "ইউনিয়ন-২"]
+                        },
+                        mirpur: {
+                            name: "মিরপুর",
+                            unions: ["ইউনিয়ন-৩", "ইউনিয়ন-৪"]
+                        }
+                    }
+                },
+                gazipur: {
+                    name: "গাজীপুর",
+                    upazilas: {
+                        kaliakair: {
+                            name: "কালিয়াকৈর",
+                            unions: ["ইউ-৫", "ইউ-৬"]
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+
+    const divisionSel = document.getElementById('currentDivision');
+    const districtSel = document.getElementById('currentDistrict');
+    const upazilaSel = document.getElementById('currentUpazila');
+    const unionSel = document.getElementById('currentUnion');
+
+    // Load divisions
+    Object.keys(bdData).forEach(div => {
+        let opt = document.createElement('option');
+        opt.value = div;
+        opt.textContent = bdData[div].name;
+        divisionSel.appendChild(opt);
+    });
+
+    divisionSel.addEventListener('change', function() {
+        districtSel.innerHTML = "<option value=''>জেলা নির্বাচন করুন</option>";
+        upazilaSel.innerHTML = "<option value=''>উপজেলা নির্বাচন করুন</option>";
+        unionSel.innerHTML = "<option value=''>ইউনিয়ন নির্বাচন করুন</option>";
+
+        const districts = bdData[this.value].districts;
+        Object.keys(districts).forEach(dis => {
+            let opt = document.createElement('option');
+            opt.value = dis;
+            opt.textContent = districts[dis].name;
+            districtSel.appendChild(opt);
+        });
+    });
+
+    districtSel.addEventListener('change', function() {
+        upazilaSel.innerHTML = "<option value=''>উপজেলা নির্বাচন করুন</option>";
+        unionSel.innerHTML = "<option value=''>ইউনিয়ন নির্বাচন করুন</option>";
+
+        const upazilas = bdData[divisionSel.value].districts[this.value].upazilas;
+        Object.keys(upazilas).forEach(upz => {
+            let opt = document.createElement('option');
+            opt.value = upz;
+            opt.textContent = upazilas[upz].name;
+            upazilaSel.appendChild(opt);
+        });
+    });
+
+    upazilaSel.addEventListener('change', function() {
+        unionSel.innerHTML = "<option value=''>ইউনিয়ন নির্বাচন করুন</option>";
+        const unions = bdData[divisionSel.value].districts[districtSel.value].upazilas[this.value].unions;
+        unions.forEach(u => {
+            let opt = document.createElement('option');
+            opt.value = u;
+            opt.textContent = u;
+            unionSel.appendChild(opt);
+        });
+    });
+    // Division -> District -> Upazila -> Union data
+    // স্থায়ী ঠিকানা
+    const mymensinghData = {
+        mymensingh: {
+            name: "ময়মনসিংহ",
+            districts: {
+                mymensingh: {
+                    name: "ময়মনসিংহ",
+                    upazilas: {
+                        gaffargaon: {
+                            name: "গফরগাঁও",
+                            unions: ["ইউনিয়ন-১", "ইউনিয়ন-২"]
+                        },
+                        trishal: {
+                            name: "ত্রিশাল",
+                            unions: ["ইউনিয়ন-৩", "ইউনিয়ন-৪"]
+                        }
+                    }
+                },
+                jamalpur: {
+                    name: "জামালপুর",
+                    upazilas: {
+                        dewanganj: {
+                            name: "দেওয়ানগঞ্জ",
+                            unions: ["ইউ-৫", "ইউ-৬"]
+                        }
+                    }
+                }
+            }
+        }
+    };
+    const divisionSel2 = document.getElementById('permanentDivision');
+    const districtSel2 = document.getElementById('permanentDistrict');
+    const upazilaSel2 = document.getElementById('permanentUpazila');
+    const unionSel2 = document.getElementById('permanentUnion');
+
+    // Load divisions
+    Object.keys(mymensinghData).forEach(div => {
+        let opt = document.createElement('option');
+        opt.value = div;
+        opt.textContent = mymensinghData[div].name;
+        divisionSel2.appendChild(opt);
+    });
+
+    divisionSel2.addEventListener('change', function() {
+        districtSel2.innerHTML = "<option value=''>জেলা নির্বাচন করুন</option>";
+        upazilaSel2.innerHTML = "<option value=''>উপজেলা নির্বাচন করুন</option>";
+        unionSel2.innerHTML = "<option value=''>ইউনিয়ন নির্বাচন করুন</option>";
+        const districts = mymensinghData[this.value].districts;
+        Object.keys(districts).forEach(dis => {
+            let opt = document.createElement('option');
+            opt.value = dis;
+            opt.textContent = districts[dis].name;
+            districtSel2.appendChild(opt);
+        });
+    });
+
+    districtSel2.addEventListener('change', function() {
+        upazilaSel2.innerHTML = "<option value=''>উপজেলা নির্বাচন করুন</option>";
+        unionSel2.innerHTML = "<option value=''>ইউনিয়ন নির্বাচন করুন</option>";
+        const upazilas = mymensinghData[divisionSel2.value].districts[this.value].upazilas;
+        Object.keys(upazilas).forEach(upz => {
+            let opt = document.createElement('option');
+            opt.value = upz;
+            opt.textContent = upazilas[upz].name;
+            upazilaSel2.appendChild(opt);
+        });
+    });
+
+    upazilaSel2.addEventListener('change', function() {
+        unionSel2.innerHTML = "<option value=''>ইউনিয়ন নির্বাচন করুন</option>";
+        const unions = mymensinghData[divisionSel2.value].districts[districtSel2.value].upazilas[this.value].unions;
+        unions.forEach(u => {
+            let opt = document.createElement('option');
+            opt.value = u;
+            opt.textContent = u;
+            unionSel2.appendChild(opt);
+        });
+    });
 </script>
-
-
 
 
 @endsection

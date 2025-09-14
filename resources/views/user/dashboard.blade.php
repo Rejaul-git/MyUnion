@@ -5,6 +5,7 @@
 
 <!-- Main Content -->
 <div class="">
+
     <div class="main-content">
         <div class="header">
             <div class="d-flex justify-content-between align-items-center">
@@ -60,11 +61,11 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <h3 class="mb-1">মোঃ আবদুল করিম</h3>
+                                    <h3 class="mb-1">{{ $users->profile->name_bn}}</h3>
                                     <p class="mb-1 opacity-75">সদস্য, ইউনিয়ন পরিষদ</p>
                                     <p class="mb-0 opacity-75">
-                                        <i class="bi bi-envelope me-2"></i>abdul.karim@example.com
-                                        <i class="bi bi-telephone ms-3 me-2"></i>+880 1712-345678
+                                        <i class="bi bi-envelope me-2"></i>{{ $users->profile->email}}
+                                        <i class="bi bi-telephone ms-3 me-2"></i> {{ $users->profile->mobile}}
                                     </p>
                                 </div>
                             </div>
@@ -87,7 +88,11 @@
                                 <div class="col-md-3 text-center">
                                     <div class="progress-circle-container">
                                         <div class="progress-circle" style="--progress: 216deg;" id="progressCircle">
-                                            <span class="progress-text" id="progressText">60%</span>
+                                            <span class="progress-text" id="progressText">@if($users->profile->status == 'approved')
+                                                100%
+                                                @else
+                                                30%
+                                                @endif</span>
                                         </div>
                                     </div>
                                 </div>
@@ -132,9 +137,12 @@
                                     </div>
 
                                     <div class="mt-3">
-                                        <button class="btn btn-complete text-white" onclick="completeProfile()">
-                                            <i class="bi bi-check-circle me-2"></i>প্রোফাইল সম্পূর্ণ করুন
-                                        </button>
+                                        <a href=" {{ route('user.profile') }}">
+                                            <button class="btn btn-complete text-white" onclick="completeProfile()">
+                                                <i class="bi bi-check-circle me-2"></i>প্রোফাইল সম্পূর্ণ করুন
+                                            </button>
+                                        </a>
+
                                     </div>
                                 </div>
                             </div>
