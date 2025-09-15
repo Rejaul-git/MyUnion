@@ -23,6 +23,7 @@ Route::middleware(['auth', 'user'])->group(function () {
         return view('user.profileform');
     })->name('user.profile');
     Route::post('/user/store', [ProfileFormController::class, 'store'])->name('store');
+    Route::post('/birthcertificate/store', [App\Http\Controllers\BirthCertificateController::class, 'store'])->name('birthcertificate.store');
 });
 
 // Admin panel route

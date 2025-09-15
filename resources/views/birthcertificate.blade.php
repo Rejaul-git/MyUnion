@@ -415,54 +415,54 @@
             <i class="bi bi-info-circle me-2"></i>
             <strong>গুরুত্বপূর্ণ তথ্য:</strong> সকল তথ্য সঠিক এবং যাচাইযোগ্য হতে হবে। ভুল তথ্য প্রদান করলে আবেদন বাতিল হতে পারে।
         </div>
+        <form id="birthCertificateForm" action="{{ route('birthcertificate.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
 
-        <form id="birthCertificateForm" onsubmit="submitApplication(event)">
 
             <!-- Applicant Information -->
             <div class="form-section">
                 <h4><i class="bi bi-person me-2"></i>আবেদনকারীর তথ্য</h4>
-
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">পূর্ণ নাম (বাংলায়) <span class="required">*</span></label>
-                        <input type="text" class="form-control" placeholder="উদাহরণ: মোহাম্মদ আবদুল করিম" required>
+                        <input type="text" name="applicant_name_bn" class="form-control" placeholder="উদাহরণ: মোহাম্মদ আবদুল করিম" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">পূর্ণ নাম (ইংরেজিতে) <span class="required">*</span></label>
-                        <input type="text" class="form-control" placeholder="Example: Mohammad Abdul Karim" required>
+                        <input type="text" name="applicant_name_en" class="form-control" placeholder="Example: Mohammad Abdul Karim" required>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">পিতার নাম (বাংলায়) <span class="required">*</span></label>
-                        <input type="text" class="form-control" placeholder="পিতার পূর্ণ নাম বাংলায়" required>
+                        <input type="text" name="father_name_bn" class="form-control" placeholder="পিতার পূর্ণ নাম বাংলায়" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">পিতার নাম (ইংরেজিতে) <span class="required">*</span></label>
-                        <input type="text" class="form-control" placeholder="Father's full name in English" required>
+                        <input type="text" name="father_name_en" class="form-control" placeholder="Father's full name in English" required>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">মাতার নাম (বাংলায়) <span class="required">*</span></label>
-                        <input type="text" class="form-control" placeholder="মাতার পূর্ণ নাম বাংলায়" required>
+                        <input type="text" name="mother_name_bn" class="form-control" placeholder="মাতার পূর্ণ নাম বাংলায়" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">মাতার নাম (ইংরেজিতে) <span class="required">*</span></label>
-                        <input type="text" class="form-control" placeholder="Mother's full name in English" required>
+                        <input type="text" name="mother_name_en" class="form-control" placeholder="Mother's full name in English" required>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label class="form-label">জন্ম তারিখ <span class="required">*</span></label>
-                        <input type="date" class="form-control" required>
+                        <input type="date" name="date_of_birth" class="form-control" required>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label">লিঙ্গ <span class="required">*</span></label>
-                        <select class="form-select" required>
+                        <select name="gender" class="form-select" required>
                             <option value="">লিঙ্গ নির্বাচন করুন</option>
                             <option value="male">পুরুষ</option>
                             <option value="female">মহিলা</option>
@@ -470,23 +470,23 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label">জন্ম নিবন্ধন নম্বর</label>
-                        <input type="text" class="form-control" placeholder="যদি থাকে তবে লিখুন">
+                        <input type="text" name="birth_registration_number" class="form-control" placeholder="যদি থাকে তবে লিখুন">
                     </div>
                 </div>
+
             </div>
 
             <!-- Birth Place Information -->
             <div class="form-section">
                 <h4><i class="bi bi-geo-alt me-2"></i>জন্মস্থানের তথ্য</h4>
-
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">জন্মস্থান (হাসপাতাল/বাড়ি) <span class="required">*</span></label>
-                        <input type="text" class="form-control" placeholder="উদাহরণ: ঢাকা মেডিকেল কলেজ হাসপাতাল" required>
+                        <input type="text" name="birth_place" class="form-control" placeholder="উদাহরণ: ঢাকা মেডিকেল কলেজ হাসপাতাল" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">জেলা <span class="required">*</span></label>
-                        <select class="form-select" required>
+                        <select name="district" class="form-select" required>
                             <option value="">জেলা নির্বাচন করুন</option>
                             <option value="dhaka">ঢাকা</option>
                             <option value="chittagong">চট্টগ্রাম</option>
@@ -503,44 +503,46 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">উপজেলা/থানা <span class="required">*</span></label>
-                        <select class="form-select" required>
+                        <select name="upazila" class="form-select" required>
                             <option value="">উপজেলা নির্বাচন করুন</option>
+                            <option value="gazipur">গাজীপুর</option>
                         </select>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">ইউনিয়ন/পৌরসভা <span class="required">*</span></label>
-                        <select class="form-select" required>
+                        <select name="union" class="form-select" required>
                             <option value="">ইউনিয়ন নির্বাচন করুন</option>
+                            <option value="gazipur">গাজীপুর</option>
                         </select>
                     </div>
                 </div>
+
             </div>
 
             <!-- Contact Information -->
             <div class="form-section">
                 <h4><i class="bi bi-telephone me-2"></i>যোগাযোগের তথ্য</h4>
-
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">মোবাইল নম্বর <span class="required">*</span></label>
-                        <input type="tel" class="form-control" placeholder="01712345678" required>
+                        <input type="tel" name="mobile_number" class="form-control" placeholder="01712345678" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">ইমেইল ঠিকানা</label>
-                        <input type="email" class="form-control" placeholder="example@gmail.com">
+                        <input type="email" name="email" class="form-control" placeholder="example@gmail.com">
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">বর্তমান ঠিকানা <span class="required">*</span></label>
-                    <textarea class="form-control" rows="3" placeholder="সম্পূর্ণ ঠিকানা লিখুন" required></textarea>
+                    <textarea name="present_address" class="form-control" rows="3" placeholder="সম্পূর্ণ ঠিকানা লিখুন" required></textarea>
                 </div>
+
             </div>
 
             <!-- Document Upload -->
             <div class="form-section">
                 <h4><i class="bi bi-cloud-upload me-2"></i>প্রয়োজনীয় কাগজপত্র</h4>
-
                 <div class="row">
                     <div class="col-md-6 mb-4">
                         <label class="form-label">পাসপোর্ট সাইজ ছবি <span class="required">*</span></label>
@@ -551,7 +553,7 @@
                             <p><strong>ছবি আপলোড করুন</strong></p>
                             <small class="text-muted">JPG, PNG ফরম্যাট, সর্বোচ্চ ২MB</small>
                         </div>
-                        <input type="file" id="photoUpload" accept="image/*" style="display: none;" required>
+                        <input type="file" name="photo" id="photoUpload" accept="image/*" style="display: none;" required>
                     </div>
 
                     <div class="col-md-6 mb-4">
@@ -563,10 +565,10 @@
                             <p><strong>NID কার্ড আপলোড করুন</strong></p>
                             <small class="text-muted">JPG, PNG, PDF ফরম্যাট, সর্বোচ্চ ৫MB</small>
                         </div>
-                        <input type="file" id="nidUpload" accept="image/*,.pdf" style="display: none;" required>
+                        <input type="file" name="nid" id="nidUpload" accept="image/*,.pdf" style="display: none;" required>
                     </div>
-                </div>
 
+                </div>
                 <div class="row">
                     <div class="col-md-6 mb-4">
                         <label class="form-label">জন্ম নিবন্ধন (যদি থাকে)</label>
@@ -577,18 +579,15 @@
                             <p><strong>জন্ম নিবন্ধন আপলোড করুন</strong></p>
                             <small class="text-muted">JPG, PNG, PDF ফরম্যাট, সর্বোচ্চ ৫MB</small>
                         </div>
-                        <input type="file" id="birthRegUpload" accept="image/*,.pdf" style="display: none;">
+                        <input type="file" name="birth_registration_document" id="birthRegUpload" accept="image/*,.pdf" style="display: none;">
                     </div>
                 </div>
+
             </div>
-
-
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">আবেদন করুন</button>
+            </div>
+        </form>
     </div>
-
-
-
-
-
-
 </div>
 @endsection
