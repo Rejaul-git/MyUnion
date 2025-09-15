@@ -47,7 +47,7 @@
                 <div class="row justify-content-center">
                     <div class="col-auto">
                         <a
-                            href="#"
+                            href="{{ route('taxes') }}"
                             class="quick-btn"
                             onclick="openService('tax-payment')">
                             <i class="fas fa-money-bill-wave me-2"></i>
@@ -152,16 +152,18 @@
 
             <!-- Tax Payment Service -->
             <div class="col-lg-4 col-md-6 mb-4">
-                <div
-                    class="service-card animate-fadeInUp"
-                    onclick="openService('tax-payment')">
-                    <i class="fas fa-money-bill-wave service-icon"></i>
-                    <h4 class="service-title" data-lang="tax-payment">কর পরিশোধ</h4>
-                    <p class="service-description" data-lang="tax-desc">
-                        হোল্ডিং ট্যাক্স, খাজনা এবং অন্যান্য স্থানীয় কর অনলাইনে পরিশোধ
-                        করুন
-                    </p>
-                </div>
+                <a href="{{ route('taxes') }}" class="text-decoration-none">
+                    <div
+                        class="service-card animate-fadeInUp">
+                        <i class="fas fa-money-bill-wave service-icon"></i>
+                        <h4 class="service-title" data-lang="tax-payment">কর পরিশোধ</h4>
+                        <p class="service-description" data-lang="tax-desc">
+                            হোল্ডিং ট্যাক্স, খাজনা এবং অন্যান্য স্থানীয় কর অনলাইনে পরিশোধ
+                            করুন
+                        </p>
+                    </div>
+                </a>
+
             </div>
 
             <!-- Social Allowance -->

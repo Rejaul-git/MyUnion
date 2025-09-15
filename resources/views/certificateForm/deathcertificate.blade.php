@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'জন্ম সনদপত্রের আবেদন - ইউনিয়ন পরিষদ')
+@section('title', 'মৃত্যু সনদপত্রের আবেদন - ইউনিয়ন পরিষদ')
 
 @section('content')
 <style>
@@ -54,14 +54,14 @@
     .certificate-icon-large {
         width: 120px;
         height: 120px;
-        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 4rem;
         margin: 0 auto 1rem;
-        box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        box-shadow: 0 10px 30px rgba(108, 117, 125, 0.3);
     }
 
     .info-cards {
@@ -75,7 +75,7 @@
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         border-radius: 15px;
         padding: 1.5rem;
-        border-left: 5px solid #ff6b6b;
+        border-left: 5px solid #6c757d;
     }
 
     .info-card h5 {
@@ -134,7 +134,7 @@
     .timeline-number {
         width: 50px;
         height: 50px;
-        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
         color: white;
         border-radius: 50%;
         display: flex;
@@ -142,7 +142,7 @@
         justify-content: center;
         font-weight: 600;
         margin-right: 1rem;
-        box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
     }
 
     .timeline-content h6 {
@@ -165,7 +165,7 @@
 
     .form-section {
         margin-bottom: 2rem;
-        border-left: 5px solid #ff6b6b;
+        border-left: 5px solid #6c757d;
         padding-left: 1.5rem;
     }
 
@@ -195,28 +195,28 @@
 
     .form-control:focus,
     .form-select:focus {
-        border-color: #ff6b6b;
-        box-shadow: 0 0 0 0.2rem rgba(255, 107, 107, 0.25);
+        border-color: #6c757d;
+        box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.25);
     }
 
     .file-upload-area {
-        border: 2px dashed #ff6b6b;
+        border: 2px dashed #6c757d;
         border-radius: 15px;
         padding: 2rem;
         text-align: center;
-        background: #fff5f5;
+        background: #f8f9fa;
         cursor: pointer;
         transition: all 0.3s ease;
     }
 
     .file-upload-area:hover {
-        background: #ffe8e8;
-        border-color: #ee5a52;
+        background: #e9ecef;
+        border-color: #495057;
     }
 
     .file-upload-icon {
         font-size: 3rem;
-        color: #ff6b6b;
+        color: #6c757d;
         margin-bottom: 1rem;
     }
 
@@ -300,11 +300,11 @@
         </a>
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h1 class="display-5 fw-bold mb-3">জন্ম সনদপত্রের আবেদন</h1>
-                <p class="lead mb-0">জন্ম নিবন্ধন এবং জন্ম সনদপত্রের জন্য অনলাইন আবেদন করুন</p>
+                <h1 class="display-5 fw-bold mb-3">মৃত্যু সনদপত্রের আবেদন</h1>
+                <p class="lead mb-0">মৃত্যু নিবন্ধন এবং মৃত্যু সনদপত্রের জন্য অনলাইন আবেদন করুন</p>
             </div>
             <div class="col-md-4 text-end">
-                <div style="font-size: 6rem; opacity: 0.3;">👶</div>
+                <div style="font-size: 6rem; opacity: 0.3;">🕊️</div>
             </div>
         </div>
     </div>
@@ -314,20 +314,20 @@
     <!-- Certificate Information -->
     <div class="certificate-info animate-fade-in">
         <div class="certificate-header">
-            <div class="certificate-icon-large">👶</div>
-            <h2 class="mb-3">জন্ম সনদপত্র সম্পর্কে</h2>
-            <p class="text-muted">জন্ম সনদপত্র একটি গুরুত্বপূর্ণ পরিচয়পত্র যা শিক্ষা, চাকরি এবং বিভিন্ন সরকারি কাজে প্রয়োজন হয়।</p>
+            <div class="certificate-icon-large">🕊️</div>
+            <h2 class="mb-3">মৃত্যু সনদপত্র সম্পর্কে</h2>
+            <p class="text-muted">মৃত্যু সনদপত্র একটি গুরুত্বপূর্ণ আইনি দলিল যা সম্পত্তি হস্তান্তর, বীমা দাবি, পেনশন এবং বিভিন্ন সরকারি কাজে প্রয়োজন হয়।</p>
         </div>
 
         <div class="info-cards">
             <div class="info-card">
                 <h5><i class="bi bi-file-text me-2"></i>প্রয়োজনীয় কাগজপত্র</h5>
                 <ul>
-                    <li><span class="check-icon">✓</span> জন্ম নিবন্ধনের মূল কপি</li>
-                    <li><span class="check-icon">✓</span> পিতা-মাতার NID কার্ডের ফটোকপি</li>
+                    <li><span class="check-icon">✓</span> মৃত ব্যক্তির জন্ম সনদপত্র/NID</li>
+                    <li><span class="check-icon">✓</span> চিকিৎসকের প্রত্যয়নপত্র</li>
+                    <li><span class="check-icon">✓</span> আবেদনকারীর NID কার্ডের ফটোকপি</li>
                     <li><span class="check-icon">✓</span> পাসপোর্ট সাইজ ছবি (২ কপি)</li>
-                    <li><span class="check-icon">✓</span> হাসপাতাল/ক্লিনিকের জন্ম সার্টিফিকেট (যদি থাকে)</li>
-                    <li><span class="check-icon">✓</span> ইমিউনাইজেশন কার্ড (যদি থাকে)</li>
+                    <li><span class="check-icon">✓</span> সাক্ষীদের তথ্য ও স্বাক্ষর</li>
                 </ul>
             </div>
 
@@ -345,11 +345,11 @@
             <div class="info-card">
                 <h5><i class="bi bi-shield-check me-2"></i>সনদের ব্যবহার</h5>
                 <ul>
-                    <li><span class="check-icon">✓</span> স্কুল/কলেজে ভর্তি</li>
-                    <li><span class="check-icon">✓</span> পাসপোর্ট তৈরি</li>
-                    <li><span class="check-icon">✓</span> ড্রাইভিং লাইসেন্স</li>
-                    <li><span class="check-icon">✓</span> চাকরির আবেদন</li>
-                    <li><span class="check-icon">✓</span> বিবাহ নিবন্ধন</li>
+                    <li><span class="check-icon">✓</span> সম্পত্তি হস্তান্তর</li>
+                    <li><span class="check-icon">✓</span> বীমা দাবি নিষ্পত্তি</li>
+                    <li><span class="check-icon">✓</span> পেনশন ও অন্যান্য সুবিধা</li>
+                    <li><span class="check-icon">✓</span> ব্যাংক অ্যাকাউন্ট বন্ধ</li>
+                    <li><span class="check-icon">✓</span> আইনি কার্যক্রম</li>
                 </ul>
             </div>
         </div>
@@ -370,7 +370,7 @@
             <div class="timeline-number">১</div>
             <div class="timeline-content">
                 <h6>অনলাইন আবেদন জমা দিন</h6>
-                <p>নিচের ফর্মটি সঠিকভাবে পূরণ করে প্রয়োজনীয় কাগজপত্র আপলোড করুন</p>
+                <p>নিচের ফরমটি সঠিকভাবে পূরণ করে প্রয়োজনীয় কাগজপত্র আপলোড করুন</p>
             </div>
         </div>
 
@@ -394,7 +394,7 @@
             <div class="timeline-number">৪</div>
             <div class="timeline-content">
                 <h6>সনদ প্রস্তুতি</h6>
-                <p>যাচাইকরণের পর আপনার জন্ম সনদপত্র প্রস্তুত করা হবে</p>
+                <p>যাচাইকরণের পর আপনার মৃত্যু সনদপত্র প্রস্তুত করা হবে</p>
             </div>
         </div>
 
@@ -409,49 +409,48 @@
 
     <!-- Application Form -->
     <div class="application-form animate-fade-in">
-        <h3 class="text-center mb-4"><i class="bi bi-file-earmark-plus me-2"></i>জন্ম সনদপত্রের আবেদন ফর্ম</h3>
+        <h3 class="text-center mb-4"><i class="bi bi-file-earmark-plus me-2"></i>মৃত্যু সনদপত্রের আবেদন ফরম</h3>
 
         <div class="alert alert-info">
             <i class="bi bi-info-circle me-2"></i>
             <strong>গুরুত্বপূর্ণ তথ্য:</strong> সকল তথ্য সঠিক এবং যাচাইযোগ্য হতে হবে। ভুল তথ্য প্রদান করলে আবেদন বাতিল হতে পারে।
         </div>
-        <form id="birthCertificateForm" action="{{ route('birthcertificate.store') }}" method="POST" enctype="multipart/form-data">
+        <form id="deathCertificateForm" action="" method="POST" enctype="multipart/form-data">
             @csrf
 
-
-            <!-- Applicant Information -->
+            <!-- Deceased Person Information -->
             <div class="form-section">
-                <h4><i class="bi bi-person me-2"></i>আবেদনকারীর তথ্য</h4>
+                <h4><i class="bi bi-person-x me-2"></i>মৃত ব্যক্তির তথ্য</h4>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">পূর্ণ নাম (বাংলায়) <span class="required">*</span></label>
-                        <input type="text" name="applicant_name_bn" class="form-control" placeholder="উদাহরণ: মোহাম্মদ আবদুল করিম" required>
+                        <input type="text" name="deceased_name_bn" class="form-control" placeholder="উদাহরণ: মোহাম্মদ আবদুল করিম" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">পূর্ণ নাম (ইংরেজিতে) <span class="required">*</span></label>
-                        <input type="text" name="applicant_name_en" class="form-control" placeholder="Example: Mohammad Abdul Karim" required>
+                        <input type="text" name="deceased_name_en" class="form-control" placeholder="Example: Mohammad Abdul Karim" required>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">পিতার নাম (বাংলায়) <span class="required">*</span></label>
-                        <input type="text" name="father_name_bn" class="form-control" placeholder="পিতার পূর্ণ নাম বাংলায়" required>
+                        <input type="text" name="deceased_father_name_bn" class="form-control" placeholder="পিতার পূর্ণ নাম বাংলায়" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">পিতার নাম (ইংরেজিতে) <span class="required">*</span></label>
-                        <input type="text" name="father_name_en" class="form-control" placeholder="Father's full name in English" required>
+                        <input type="text" name="deceased_father_name_en" class="form-control" placeholder="Father's full name in English" required>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">মাতার নাম (বাংলায়) <span class="required">*</span></label>
-                        <input type="text" name="mother_name_bn" class="form-control" placeholder="মাতার পূর্ণ নাম বাংলায়" required>
+                        <input type="text" name="deceased_mother_name_bn" class="form-control" placeholder="মাতার পূর্ণ নাম বাংলায়" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">মাতার নাম (ইংরেজিতে) <span class="required">*</span></label>
-                        <input type="text" name="mother_name_en" class="form-control" placeholder="Mother's full name in English" required>
+                        <input type="text" name="deceased_mother_name_en" class="form-control" placeholder="Mother's full name in English" required>
                     </div>
                 </div>
 
@@ -461,6 +460,10 @@
                         <input type="date" name="date_of_birth" class="form-control" required>
                     </div>
                     <div class="col-md-4 mb-3">
+                        <label class="form-label">মৃত্যুর তারিখ <span class="required">*</span></label>
+                        <input type="date" name="date_of_death" class="form-control" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
                         <label class="form-label">লিঙ্গ <span class="required">*</span></label>
                         <select name="gender" class="form-select" required>
                             <option value="">লিঙ্গ নির্বাচন করুন</option>
@@ -468,21 +471,32 @@
                             <option value="female">মহিলা</option>
                         </select>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label">জন্ম নিবন্ধন নম্বর</label>
-                        <input type="text" name="birth_registration_number" class="form-control" placeholder="যদি থাকে তবে লিখুন">
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">NID নম্বর (যদি থাকে)</label>
+                        <input type="text" name="deceased_nid" class="form-control" placeholder="মৃত ব্যক্তির NID নম্বর">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">বয়স (মৃত্যুর সময়) <span class="required">*</span></label>
+                        <input type="number" name="age_at_death" class="form-control" placeholder="বছর" required>
                     </div>
                 </div>
 
+                <div class="mb-3">
+                    <label class="form-label">মৃত্যুর কারণ <span class="required">*</span></label>
+                    <input type="text" name="cause_of_death" class="form-control" placeholder="উদাহরণ: হৃদরোগ, বার্ধক্য, দুর্ঘটনা ইত্যাদি" required>
+                </div>
             </div>
 
-            <!-- Birth Place Information -->
+            <!-- Death Place Information -->
             <div class="form-section">
-                <h4><i class="bi bi-geo-alt me-2"></i>জন্মস্থানের তথ্য</h4>
+                <h4><i class="bi bi-geo-alt me-2"></i>মৃত্যুর স্থানের তথ্য</h4>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">জন্মস্থান (হাসপাতাল/বাড়ি) <span class="required">*</span></label>
-                        <input type="text" name="birth_place" class="form-control" placeholder="উদাহরণ: ঢাকা মেডিকেল কলেজ হাসপাতাল" required>
+                        <label class="form-label">মৃত্যুর স্থান (হাসপাতাল/বাড়ি) <span class="required">*</span></label>
+                        <input type="text" name="death_place" class="form-control" placeholder="উদাহরণ: ঢাকা মেডিকেল কলেজ হাসপাতাল" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">জেলা <span class="required">*</span></label>
@@ -516,20 +530,40 @@
                         </select>
                     </div>
                 </div>
-
             </div>
 
-            <!-- Contact Information -->
+            <!-- Applicant Information -->
             <div class="form-section">
-                <h4><i class="bi bi-telephone me-2"></i>যোগাযোগের তথ্য</h4>
+                <h4><i class="bi bi-person me-2"></i>আবেদনকারীর তথ্য</h4>
                 <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">আবেদনকারীর নাম <span class="required">*</span></label>
+                        <input type="text" name="applicant_name" class="form-control" placeholder="আপনার পূর্ণ নাম" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">মৃত ব্যক্তির সাথে সম্পর্ক <span class="required">*</span></label>
+                        <select name="relationship" class="form-select" required>
+                            <option value="">সম্পর্ক নির্বাচন করুন</option>
+                            <option value="son">পুত্র</option>
+                            <option value="daughter">কন্যা</option>
+                            <option value="spouse">স্বামী/স্ত্রী</option>
+                            <option value="brother">ভাই</option>
+                            <option value="sister">বোন</option>
+                            <option value="father">পিতা</option>
+                            <option value="mother">মাতা</option>
+                            <option value="other">অন্যান্য</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">আবেদনকারীর NID নম্বর <span class="required">*</span></label>
+                        <input type="text" name="applicant_nid" class="form-control" placeholder="১৭ সংখ্যার NID নম্বর" required>
+                    </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">মোবাইল নম্বর <span class="required">*</span></label>
                         <input type="tel" name="mobile_number" class="form-control" placeholder="01712345678" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">ইমেইল ঠিকানা</label>
-                        <input type="email" name="email" class="form-control" placeholder="example@gmail.com">
                     </div>
                 </div>
 
@@ -537,56 +571,33 @@
                     <label class="form-label">বর্তমান ঠিকানা <span class="required">*</span></label>
                     <textarea name="present_address" class="form-control" rows="3" placeholder="সম্পূর্ণ ঠিকানা লিখুন" required></textarea>
                 </div>
-
             </div>
 
-            <!-- Document Upload -->
+            <!-- Witness Information -->
             <div class="form-section">
-                <h4><i class="bi bi-cloud-upload me-2"></i>প্রয়োজনীয় কাগজপত্র</h4>
+                <h4><i class="bi bi-people me-2"></i>সাক্ষীর তথ্য (২ জন)</h4>
                 <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <label class="form-label">পাসপোর্ট সাইজ ছবি <span class="required">*</span></label>
-                        <div class="file-upload-area" onclick="document.getElementById('photoUpload').click()">
-                            <div class="file-upload-icon">
-                                <i class="bi bi-camera"></i>
-                            </div>
-                            <p><strong>ছবি আপলোড করুন</strong></p>
-                            <small class="text-muted">JPG, PNG ফরম্যাট, সর্বোচ্চ ২MB</small>
-                        </div>
-                        <input type="file" name="photo" id="photoUpload" accept="image/*" style="display: none;" required>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">সাক্ষী ১ এর নাম <span class="required">*</span></label>
+                        <input type="text" name="witness1_name" class="form-control" placeholder="প্রথম সাক্ষীর পূর্ণ নাম" required>
                     </div>
-
-                    <div class="col-md-6 mb-4">
-                        <label class="form-label">পিতা-মাতার NID কপি <span class="required">*</span></label>
-                        <div class="file-upload-area" onclick="document.getElementById('nidUpload').click()">
-                            <div class="file-upload-icon">
-                                <i class="bi bi-file-earmark-text"></i>
-                            </div>
-                            <p><strong>NID কার্ড আপলোড করুন</strong></p>
-                            <small class="text-muted">JPG, PNG, PDF ফরম্যাট, সর্বোচ্চ ৫MB</small>
-                        </div>
-                        <input type="file" name="nid" id="nidUpload" accept="image/*,.pdf" style="display: none;" required>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">সাক্ষী ১ এর মোবাইল নম্বর <span class="required">*</span></label>
+                        <input type="tel" name="witness1_mobile" class="form-control" placeholder="01712345678" required>
                     </div>
-
                 </div>
                 <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <label class="form-label">জন্ম নিবন্ধন (যদি থাকে)</label>
-                        <div class="file-upload-area" onclick="document.getElementById('birthRegUpload').click()">
-                            <div class="file-upload-icon">
-                                <i class="bi bi-file-earmark-check"></i>
-                            </div>
-                            <p><strong>জন্ম নিবন্ধন আপলোড করুন</strong></p>
-                            <small class="text-muted">JPG, PNG, PDF ফরম্যাট, সর্বোচ্চ ৫MB</small>
-                        </div>
-                        <input type="file" name="birth_registration_document" id="birthRegUpload" accept="image/*,.pdf" style="display: none;">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">সাক্ষী ২ এর নাম <span class="required">*</span></label>
+                        <input type="text" name="witness2_name" class="form-control" placeholder="দ্বিতীয় সাক্ষীর পূর্ণ নাম" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">সাক্ষী ২ এর মোবাইল নম্বর <span class="required">*</span></label>
+                        <input type="tel" name="witness2_mobile" class="form-control" placeholder="01712345678" required>
                     </div>
                 </div>
-
             </div>
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary">আবেদন করুন</button>
-            </div>
+            <button type="submit" class="btn w-100 btn-submit">আবেদন করুন</button>
         </form>
     </div>
 </div>

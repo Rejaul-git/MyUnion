@@ -9,12 +9,22 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+
 Route::get('/cirtificates', function () {
     return view('certificateList');
 })->name('cirtificates');
+
 Route::get('/birthcertificate', function () {
-    return view('birthcertificate');
+    return view('certificateForm.birthcertificate');
 })->name('birthcertificate');
+
+Route::get('/deathcertificate', function () {
+    return view('certificateForm.deathcertificate');
+})->name('deathcertificate');
+// taxFrom
+Route::get('/taxes', function () {
+    return view('tax.taxsSubmitForm');
+})->name('taxes');
 
 
 Route::middleware(['auth', 'user'])->group(function () {
@@ -26,6 +36,10 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::post('/birthcertificate/store', [App\Http\Controllers\BirthCertificateController::class, 'store'])->name('birthcertificate.store');
     Route::get('/birthcertificate/payment/{application_id}', [App\Http\Controllers\BirthCertificateController::class, 'paymentForm'])->name('payment.form');
     Route::post('/birthcertificate/process-payment', [App\Http\Controllers\BirthCertificateController::class, 'processPayment'])->name('birthcertificate.process.payment');
+    // tax-dashboard
+    Route::get('/user/tax', function () {
+        return view('user.taxPaymentDashboard');
+    })->name('tax.dashboard');
 });
 
 // Admin panel route

@@ -9,10 +9,10 @@
 
 
         <nav class="nav flex-column">
-            <a class="nav-link active" href="{{ route('user.dashboard') }}" data-page="dashboard">
+            <a class="nav-link {{ Route::currentRouteName() == 'user.dashboard' ? 'active' : '' }}" href="{{ route('user.dashboard') }}" data-page="dashboard">
                 <i class="bi bi-house-door"></i> ড্যাশবোর্ড
             </a>
-            <a class="nav-link" href="{{ route('user.profile') }}" data-page="profile">
+            <a class="nav-link {{ Route::currentRouteName() == 'user.profile' ? 'active' : '' }}" href="{{ route('user.profile') }}" data-page="profile">
                 <i class="bi bi-person-gear"></i> প্রোফাইল সম্পন্য করুন
             </a>
             <a class="nav-link" href="" data-page="profile">
@@ -25,7 +25,7 @@
                 <i class="bi bi-file-check"></i> আবেদন সমূহ
                 <span class="notification-badge">3</span>
             </a>
-            <a class="nav-link" href="#" data-page="tax">
+            <a class="nav-link {{ Route::currentRouteName() == 'tax.dashboard' ? 'active' : '' }}" href="{{ route('tax.dashboard') }}" data-page="tax payment">
                 <i class="bi bi-calendar-event"></i> ট্যাক্স ও পেমেন্ট
             </a>
             <a class="nav-link" href="#" data-page="social grants">

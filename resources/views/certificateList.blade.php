@@ -380,7 +380,7 @@
                                 <span>দ্রুত প্রক্রিয়াকরণ (৫-১০ দিন)</span>
                             </div>
                         </div>
-                        <a href="#" class="apply-btn">আবেদন করুন</a>
+                        <a href="{{ route('deathcertificate') }}" class="apply-btn">আবেদন করুন</a>
                     </div>
                 </div>
 
