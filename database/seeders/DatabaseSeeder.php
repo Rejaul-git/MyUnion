@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             AdminUserSeeder::class,
+            ProfileSeeder::class,
             // অন্য Seeder যদি থাকে যেমন:
             // ProductSeeder::class,
         ]);

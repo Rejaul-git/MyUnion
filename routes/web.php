@@ -12,6 +12,9 @@ Route::get('/', function () {
 Route::get('/cirtificates', function () {
     return view('certificateList');
 })->name('cirtificates');
+Route::get('/birthcertificate', function () {
+    return view('birthcertificate');
+})->name('birthcertificate');
 
 
 Route::middleware(['auth', 'user'])->group(function () {
