@@ -24,6 +24,8 @@ Route::middleware(['auth', 'user'])->group(function () {
     })->name('user.profile');
     Route::post('/user/store', [ProfileFormController::class, 'store'])->name('store');
     Route::post('/birthcertificate/store', [App\Http\Controllers\BirthCertificateController::class, 'store'])->name('birthcertificate.store');
+    Route::get('/birthcertificate/payment/{application_id}', [App\Http\Controllers\BirthCertificateController::class, 'paymentForm'])->name('payment.form');
+    Route::post('/birthcertificate/process-payment', [App\Http\Controllers\BirthCertificateController::class, 'processPayment'])->name('birthcertificate.process.payment');
 });
 
 // Admin panel route

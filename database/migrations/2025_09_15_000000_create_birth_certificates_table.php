@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('birth_certificates', function (Blueprint $table) {
             $table->id();
+            $table->string('application_no')->unique();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+            $table->enum('payment_status', ['pending','paid','failed','cancelled'])->default('pending');
+            $table->decimal('fee', 10, 2)->default(50.00);
+            $table->enum('status', ['pending','approved','rejected'])->default('pending');
+            $table->text('remarks')->nullable();
             $table->string('applicant_name_bn');
             $table->string('applicant_name_en');
             $table->string('father_name_bn');

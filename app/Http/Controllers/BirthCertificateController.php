@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BirthCertificate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class BirthCertificateController extends Controller
 {
@@ -39,6 +40,8 @@ class BirthCertificateController extends Controller
 
         // Create a new birth certificate record
         $birthCertificate = new BirthCertificate();
+        $birthCertificate->application_no = $this->generateApplicationNumber();
+        $birthCertificate->user_id = Auth::id();
         $birthCertificate->applicant_name_bn = $request->applicant_name_bn;
         $birthCertificate->applicant_name_en = $request->applicant_name_en;
         $birthCertificate->father_name_bn = $request->father_name_bn;
@@ -75,7 +78,31 @@ class BirthCertificateController extends Controller
         // Save the birth certificate record
         $birthCertificate->save();
 
+        // Redirect to payment form with application details
+        return redirect()->route('payment.form', ['application_id' => $birthCertificate->id]);
+    }
+
+    private function generateApplicationNumber()
+    {
+        // Generate a unique application number
+        return 'APP-BC-' . date('Y') . '-' . str_pad(rand(1, 999999), 6, '0', STR_PAD_LEFT);
+    }
+
+    public function paymentForm($application_id)
+    {
+        $application = BirthCertificate::findOrFail($application_id);
+        return view('paymentForm', compact('application'));
+    }
+
+    public function processPayment(Request $request)
+    {
+        $application = BirthCertificate::findOrFail($request->application_id);
+        
+        // Update payment status to paid
+        $application->payment_status = 'paid';
+        $application->save();
+        
         // Redirect back with success message
-        return redirect()->back()->with('success', 'আপনার জন্ম সনদপত্রের আবেদন সফলভাবে জমা হয়েছে।');
+        return redirect()->route('user.dashboard')->with('success', 'পেমেন্ট সফলভাবে সম্পন্ন হয়েছে। আপনার আবেদন প্রক্রিয়াধীন রয়েছে।');
     }
 }

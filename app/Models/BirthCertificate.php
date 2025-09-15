@@ -10,6 +10,12 @@ class BirthCertificate extends Model
     use HasFactory;
 
     protected $fillable = [
+        'application_no',
+        'user_id',
+        'payment_status',
+        'fee',
+        'status',
+        'remarks',
         'applicant_name_bn',
         'applicant_name_en',
         'father_name_bn',
