@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>স্মার্ট নাগরিক সেবা | Municipal Citizen Services</title>
+    <link rel="icon" type="image/png" href="{{ asset('logo.png') }}">
 
     <link
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
@@ -25,10 +26,14 @@
 <body>
     <!-- Language Switcher -->
     <div class="language-switcher">
-        <button class="lang-btn active" onclick="switchLanguage('bn')">
+        <!-- <button class="lang-btn active" onclick="switchLanguage('bn')">
             বাং
         </button>
-        <button class="lang-btn" onclick="switchLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="switchLanguage('en')">EN</button> -->
+        <!-- Language Buttons -->
+        <button onclick="doGTranslate('en|en')" class="btn btn-primary">English</button>
+        <button onclick="doGTranslate('en|bn')" class="btn btn-success">বাংলা</button>
+
     </div>
 
     <!-- Navbar -->
@@ -351,7 +356,7 @@
         document
             .getElementById("loginForm")
             .addEventListener("submit", function(e) {
-                e.preventDefault();
+                // e.preventDefault();
 
                 const phoneNumber = document.getElementById("phoneNumber").value;
                 const password = document.getElementById("password").value;
@@ -493,6 +498,47 @@
                 document.getElementById("loginForm").reset();
             });
     </script>
+    <div id="google_translate_element"></div>
+
+    <!-- Hidden Google Translate Element -->
+    <div id="google_translate_element" style="display:none;"></div>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en', // ডিফল্ট ভাষা (en or bn)
+                includedLanguages: 'en,bn', // শুধু English & Bangla
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script type="text/javascript">
+        function doGTranslate(lang_pair) {
+            if (lang_pair.value) lang_pair = lang_pair.value;
+            if (lang_pair == '') return;
+            var lang = lang_pair.split('|')[1];
+            var teCombo;
+            var sel = document.getElementsByTagName('select');
+            for (var i = 0; i < sel.length; i++)
+                if (sel[i].className == 'goog-te-combo') teCombo = sel[i];
+            if (teCombo == null || teCombo.length == 0 || teCombo.innerHTML.length == 0) {
+                setTimeout(function() {
+                    doGTranslate(lang_pair)
+                }, 500);
+            } else {
+                teCombo.value = lang;
+                teCombo.dispatchEvent(new Event("change"));
+            }
+        }
+    </script>
+
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 
 </html>

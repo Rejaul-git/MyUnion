@@ -2,13 +2,6 @@
 
 @section('content')
 <style>
-    /* body {
-    font-family: "SolaimanLipi", Arial, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    padding: 20px 0;
-} */
-
     .container {
         max-width: 1200px;
     }
@@ -19,6 +12,7 @@
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         margin-bottom: 30px;
+        margin-top: 20px;
     }
 
     .header-section {
@@ -633,7 +627,7 @@
         </div>
 
         <!-- Notice Panel -->
-        <div class="col-lg-4">
+        <div class="col-lg-4 mt-4">
             <div class="notice-panel bounce-in">
                 <h5><i class="fas fa-info-circle me-2"></i>নিবন্ধন নির্দেশনা</h5>
                 <ul>

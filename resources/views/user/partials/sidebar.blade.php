@@ -15,10 +15,10 @@
             <a class="nav-link {{ Route::currentRouteName() == 'user.profile' ? 'active' : '' }}" href="{{ route('user.profile') }}" data-page="profile">
                 <i class="bi bi-person-gear"></i> প্রোফাইল সম্পন্য করুন
             </a>
-            <a class="nav-link" href="" data-page="profile">
+            <a class="nav-link {{ Route::currentRouteName() == 'user.usermangment' ? 'active' : '' }} " href="{{ route('user.usermangment') }}" data-page="profile">
                 <i class="bi bi-person-gear"></i> প্রোফাইল ব্যবস্থাপনা
             </a>
-            <a class="nav-link" href="#" data-page="certificates">
+            <a class="nav-link {{ Route::currentRouteName() == 'user.certificatesService' ? 'active' : '' }}" href="{{ route('user.certificatesService') }}" data-page="certificates">
                 <i class="bi bi-file-earmark-text"></i> সার্টিফিকেট সার্ভিসেস
             </a>
             <a class="nav-link menu-notification" href="#" data-page="applications">

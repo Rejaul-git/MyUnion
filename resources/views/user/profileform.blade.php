@@ -394,7 +394,6 @@
                         <label class="form-label">বিভাগ <span class="required">*</span></label>
                         <select class="form-select" id="currentDivision" name="current_division" required>
                             <option value="">বিভাগ নির্বাচন করুন</option>
-                            <option value="dhaka">ঢাকা</option>
                             <option value="chittagong">চট্টগ্রাম</option>
                             <option value="rajshahi">রাজশাহী</option>
                             <option value="khulna">খুলনা</option>
@@ -476,7 +475,6 @@
                                 <option value="barisal">বরিশাল</option>
                                 <option value="sylhet">সিলেট</option>
                                 <option value="rangpur">রংপুর</option>
-                                <option value="mymensingh">ময়মনসিংহ</option>
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">

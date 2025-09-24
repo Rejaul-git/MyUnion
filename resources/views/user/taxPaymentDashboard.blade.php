@@ -1,23 +1,8 @@
 @extends('layouts.user')
 @section('title', 'ইউনিয়ন পরিষদ নাগরিক সেবা')
 @section('content')
-<!-- <!DOCTYPE html>
-<html lang="bn">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>কর ও পেমেন্ট ড্যাশবোর্ড - ইউনিয়ন পরিষদ</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&display=swap" rel="stylesheet"> -->
 <style>
-    /* body {
-        font-family: 'Noto Sans Bengali', Arial, sans-serif;
-        background: linear-gradient(135deg, #7cb342 0%, #764ba2 100%);
-        min-height: 100vh;
-    } */
-
     .page-header {
         background: linear-gradient(135deg, #7cb342 0%, #34495e 100%);
         color: white;
@@ -206,28 +191,47 @@
             <div>
                 <h3 class="mb-0"><i class="bi bi-calculator me-2"></i>কর ব্যবস্থাপনা</h3>
             </div>
+            @if(!$hasHoldingNumber)
             <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#holdingModal">
                 <i class="bi bi-plus-circle me-2"></i>হোল্ডিং নম্বর নিতে ক্লিক করুন
             </button>
+            @else
+            <a href="{{ route('tax.payment.form') }}" class="btn btn-light">
+                <i class="bi bi-credit-card me-2"></i>ট্যাক্স পরিশোধ করুন
+            </a>
+            @endif
         </div>
 
         <div class="row mb-4">
             <div class="col-md-4">
                 <div class="text-center p-3 bg-light rounded">
                     <h5>বার্ষিক কর</h5>
-                    <span class="amount-highlight">৫,০০০ টাকা</span>
+                    <span class="amount-highlight">
+                        @php
+                        $currentYear = date('Y');
+                        $annualTax = $taxPayments->where('created_at', '>=', $currentYear . '-01-01')->where('created_at', '<=', $currentYear . '-12-31' )->sum('tax_amount');
+                            @endphp
+                            {{ number_format($annualTax) }} টাকা
+                    </span>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="text-center p-3 bg-light rounded">
                     <h5>বকেয়া কর</h5>
-                    <span class="amount-highlight">২,৫০০ টাকা</span>
+                    <span class="amount-highlight">
+                        @php
+                        $paidTax = $taxPayments->where('payment_status', 'paid')->sum('tax_amount');
+                        $totalTax = $taxPayments->sum('tax_amount');
+                        $dueTax = $totalTax - $paidTax;
+                        @endphp
+                        {{ number_format($dueTax) }} টাকা
+                    </span>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="text-center p-3 bg-light rounded">
                     <h5>মোট পরিশোধিত</h5>
-                    <span class="amount-highlight">১৫,০০০ টাকা</span>
+                    <span class="amount-highlight">{{ number_format($paidTax) }} টাকা</span>
                 </div>
             </div>
         </div>
@@ -279,9 +283,15 @@
                     <div class="mb-3" style="font-size: 3rem; color: #28a745;">💳</div>
                     <h5>হোল্ডিং ট্যাক্স পরিশোধ</h5>
                     <p class="text-muted">অনলাইনে হোল্ডিং ট্যাক্স পরিশোধ করুন</p>
-                    <button class="btn btn-primary-custom" onclick="location.href='#payTax'">
+                    @if($hasHoldingNumber)
+                    <a href="{{ route('tax.payment.form') }}" class="btn btn-primary-custom">
                         <i class="bi bi-credit-card me-2"></i>ট্যাক্স পরিশোধ করুন
+                    </a>
+                    @else
+                    <button class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#holdingModal">
+                        <i class="bi bi-plus-circle me-2"></i>হোল্ডিং নম্বর নিতে ক্লিক করুন
                     </button>
+                    @endif
                 </div>
             </div>
         </div>
@@ -334,24 +344,24 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @forelse($taxPayments as $payment)
                                 <tr>
-                                    <td>১৫/১২/২০২৪</td>
-                                    <td>TXN123456789</td>
-                                    <td>৫,০০০ টাকা</td>
-                                    <td><span class="status-paid">পরিশোধিত</span></td>
+                                    <td>{{ $payment->created_at->format('d/m/Y') }}</td>
+                                    <td>TAX{{ $payment->id }}</td>
+                                    <td>{{ number_format($payment->tax_amount) }} টাকা</td>
+                                    <td>
+                                        @if($payment->payment_status == 'paid')
+                                        <span class="status-paid">পরিশোধিত</span>
+                                        @else
+                                        <span class="status-pending">অপেক্ষমাণ</span>
+                                        @endif
+                                    </td>
                                 </tr>
+                                @empty
                                 <tr>
-                                    <td>১০/১১/২০২৪</td>
-                                    <td>TXN987654321</td>
-                                    <td>২,৫০০ টাকা</td>
-                                    <td><span class="status-pending">অপেক্ষমাণ</span></td>
+                                    <td colspan="4" class="text-center">কোন পেমেন্ট ইতিহাস নেই</td>
                                 </tr>
-                                <tr>
-                                    <td>০৮/১০/২০২৪</td>
-                                    <td>TXN456789123</td>
-                                    <td>৭,৫০০ টাকা</td>
-                                    <td><span class="status-overdue">বিলম্বিত</span></td>
-                                </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -362,15 +372,15 @@
                 <div class="mb-4">
                     <h5><i class="bi bi-download me-2"></i>সার্টিফিকেট/রসিদ</h5>
                     <div class="d-grid gap-2">
-                        <button class="btn btn-outline-success" onclick="downloadReceipt('TXN123456789')">
+                        <a href="{{ route('tax.invoice.download', 1) }}" class="btn btn-outline-success">
                             <i class="bi bi-file-earmark-arrow-down me-2"></i>রসিদ ডাউনলোড - ৫,০০০ টাকা
-                        </button>
-                        <button class="btn btn-outline-primary" onclick="downloadReceipt('TXN987654321')">
+                        </a>
+                        <a href="{{ route('tax.invoice.download', 2) }}" class="btn btn-outline-primary">
                             <i class="bi bi-file-earmark-arrow-down me-2"></i>রসিদ ডাউনলোড - ২,৫০০ টাকা
-                        </button>
-                        <button class="btn btn-outline-info" onclick="downloadReceipt('TXN456789123')">
+                        </a>
+                        <a href="{{ route('tax.invoice.download', 3) }}" class="btn btn-outline-info">
                             <i class="bi bi-file-earmark-arrow-down me-2"></i>রসিদ ডাউনলোড - ৭,৫০০ টাকা
-                        </button>
+                        </a>
                         <button class="btn btn-primary-custom mt-3" data-bs-toggle="modal" data-bs-target="#paymentHistoryModal">
                             <i class="bi bi-list-ul me-2"></i>সম্পূর্ণ পেমেন্ট ইতিহাস দেখুন
                         </button>
@@ -392,10 +402,15 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action="{{ route('tax.holding.number.store') }}">
+                    @csrf
                     <div class="info-box">
                         <i class="bi bi-info-circle me-2"></i>
                         <strong>বিশেষ দ্রষ্টব্য:</strong> সঠিক তথ্য প্রদান করুন। ভুল তথ্যের জন্য আবেদন বাতিল হতে পারে।
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">হোল্ডিং নম্বর <span class="text-danger">*</span></label>
+                        <input type="text" name="holding_number" class="form-control" placeholder="হোল্ডিং নম্বর লিখুন" required>
                     </div>
 
                     <h6 class="mb-3 text-primary"><i class="bi bi-building me-2"></i>সম্পত্তির তথ্য</h6>
@@ -403,17 +418,17 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label class="form-label">জমির খতিয়ান নম্বর <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" placeholder="খতিয়ান নম্বর লিখুন" required>
+                            <input type="text" name="land_khatian" class="form-control" placeholder="খতিয়ান নম্বর লিখুন" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">দাগ নম্বর <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" placeholder="দাগ নম্বর লিখুন" required>
+                            <input type="text" name="dag_number" class="form-control" placeholder="দাগ নম্বর লিখুন" required>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">জমির পরিমাণ (শতাংশে) <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" placeholder="উদাহরণ: ৫.৫" step="0.01" required>
+                        <input type="number" name="land_amount" class="form-control" placeholder="উদাহরণ: ৫.৫" step="0.01" required>
                     </div>
 
                     <div class="mb-3">
@@ -421,7 +436,7 @@
                         <div class="row mt-2">
                             <div class="col-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="propertyType" id="residential" value="residential">
+                                    <input class="form-check-input" type="radio" name="property_type" id="residential" value="residential" required>
                                     <label class="form-check-label" for="residential">
                                         বসতবাড়ি
                                     </label>
@@ -429,7 +444,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="propertyType" id="commercial" value="commercial">
+                                    <input class="form-check-input" type="radio" name="property_type" id="commercial" value="commercial" required>
                                     <label class="form-check-label" for="commercial">
                                         ব্যবসায়িক প্রতিষ্ঠান
                                     </label>
@@ -437,7 +452,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="propertyType" id="mixed" value="mixed">
+                                    <input class="form-check-input" type="radio" name="property_type" id="mixed" value="mixed" required>
                                     <label class="form-check-label" for="mixed">
                                         মিশ্র ব্যবহার
                                     </label>
@@ -449,41 +464,42 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label class="form-label">কক্ষ সংখ্যা</label>
-                            <input type="number" class="form-control" placeholder="কক্ষ সংখ্যা" min="1">
+                            <input type="number" name="room_count" class="form-control" placeholder="কক্ষ সংখ্যা" min="1">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">তলা সংখ্যা</label>
-                            <input type="number" class="form-control" placeholder="তলা সংখ্যা" min="1">
+                            <input type="number" name="floor_count" class="form-control" placeholder="তলা সংখ্যা" min="1">
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">বিদ্যমান হোল্ডিং নম্বর (যদি থাকে)</label>
-                        <input type="text" class="form-control" placeholder="পূর্বের হোল্ডিং নম্বর (থাকলে)">
+                        <input type="text" name="existing_holding_number" class="form-control" placeholder="পূর্বের হোল্ডিং নম্বর (থাকলে)">
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label class="form-label">আবেদনকারীর নাম <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" placeholder="পূর্ণ নাম" required>
+                            <input type="text" name="applicant_name" class="form-control" placeholder="পূর্ণ নাম" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">মোবাইল নম্বর <span class="text-danger">*</span></label>
-                            <input type="tel" class="form-control" placeholder="01XXXXXXXXX" required>
+                            <input type="tel" name="mobile_number" class="form-control" placeholder="01XXXXXXXXX" required>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">বর্তমান ঠিকানা <span class="text-danger">*</span></label>
-                        <textarea class="form-control" rows="3" placeholder="সম্পূর্ণ ঠিকানা লিখুন" required></textarea>
+                        <textarea name="current_address" class="form-control" rows="3" placeholder="সম্পূর্ণ ঠিকানা লিখুন" required></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">বাতিল</button>
+                        <button type="submit" class="btn btn-primary-custom">
+                            <i class="bi bi-send me-2"></i>আবেদন জমা দিন
+                        </button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">বাতিল</button>
-                <button type="button" class="btn btn-primary-custom" onclick="submitHoldingApplication()">
-                    <i class="bi bi-send me-2"></i>আবেদন জমা দিন
-                </button>
             </div>
         </div>
     </div>
@@ -513,38 +529,34 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($taxPayments as $payment)
                             <tr>
-                                <td>২০২৪</td>
-                                <td>৫,০০০ টাকা</td>
-                                <td>১৫/১২/২০২৪</td>
-                                <td>TXN123456789</td>
-                                <td><span class="status-paid">পরিশোধিত</span></td>
-                                <td><button class="btn btn-sm btn-outline-success" onclick="downloadReceipt('TXN123456789')"><i class="bi bi-download"></i></button></td>
+                                <td>{{ $payment->created_at->format('Y') }}</td>
+                                <td>{{ number_format($payment->tax_amount) }} টাকা</td>
+                                <td>{{ $payment->created_at->format('d/m/Y') }}</td>
+                                <td>TAX{{ $payment->id }}</td>
+                                <td>
+                                    @if($payment->payment_status == 'paid')
+                                    <span class="status-paid">পরিশোধিত</span>
+                                    @else
+                                    <span class="status-pending">অপেক্ষমাণ</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($payment->payment_status == 'paid')
+                                    <a href="{{ route('tax.invoice.download', $payment->id) }}" class="btn btn-sm btn-outline-success">
+                                        <i class="bi bi-download"></i>
+                                    </a>
+                                    @else
+                                    -
+                                    @endif
+                                </td>
                             </tr>
+                            @empty
                             <tr>
-                                <td>২০২৩</td>
-                                <td>৪,৫০০ টাকা</td>
-                                <td>২০/১২/২০২৩</td>
-                                <td>TXN987654321</td>
-                                <td><span class="status-paid">পরিশোধিত</span></td>
-                                <td><button class="btn btn-sm btn-outline-success" onclick="downloadReceipt('TXN987654321')"><i class="bi bi-download"></i></button></td>
+                                <td colspan="6" class="text-center">কোন ট্যাক্স ইতিহাস নেই</td>
                             </tr>
-                            <tr>
-                                <td>২০২২</td>
-                                <td>৪,০০০ টাকা</td>
-                                <td>১৮/১১/২০২২</td>
-                                <td>TXN456789123</td>
-                                <td><span class="status-paid">পরিশোধিত</span></td>
-                                <td><button class="btn btn-sm btn-outline-success" onclick="downloadReceipt('TXN456789123')"><i class="bi bi-download"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>২০২১</td>
-                                <td>৩,৫০০ টাকা</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td><span class="status-overdue">অপরিশোধিত</span></td>
-                                <td>-</td>
-                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -581,25 +593,33 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                            $totalDue = 0;
+                            @endphp
+                            @forelse($taxPayments->where('payment_status', '!=', 'paid') as $payment)
+                            @php
+                            $dueAmount = $payment->tax_amount;
+                            $penalty = $dueAmount * 0.2; // 20% penalty
+                            $totalDue += $dueAmount + $penalty;
+                            $daysOverdue = now()->diffInDays($payment->created_at, false);
+                            @endphp
                             <tr>
-                                <td>২০২১</td>
-                                <td>৩,৫০০ টাকা</td>
-                                <td>৭০০ টাকা</td>
-                                <td class="fw-bold text-danger">৪,২০০ টাকা</td>
-                                <td>১০৯৫ দিন</td>
+                                <td>{{ $payment->created_at->format('Y') }}</td>
+                                <td>{{ number_format($dueAmount) }} টাকা</td>
+                                <td>{{ number_format($penalty) }} টাকা</td>
+                                <td class="fw-bold text-danger">{{ number_format($dueAmount + $penalty) }} টাকা</td>
+                                <td>{{ abs($daysOverdue) }} দিন</td>
                             </tr>
+                            @empty
                             <tr>
-                                <td>২০২০</td>
-                                <td>৩,০০০ টাকা</td>
-                                <td>১,২০০ টাকা</td>
-                                <td class="fw-bold text-danger">৪,২০০ টাকা</td>
-                                <td>১৪৬০ দিন</td>
+                                <td colspan="5" class="text-center">কোন বকেয়া নেই</td>
                             </tr>
+                            @endforelse
                         </tbody>
                         <tfoot class="table-dark">
                             <tr>
                                 <th colspan="3">মোট বকেয়া:</th>
-                                <th class="text-warning">৮,৪০০ টাকা</th>
+                                <th class="text-warning">{{ number_format($totalDue) }} টাকা</th>
                                 <th></th>
                             </tr>
                         </tfoot>
@@ -607,9 +627,21 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <button class="btn btn-primary-custom btn-lg" onclick="payAllDues()">
-                        <i class="bi bi-credit-card me-2"></i>সমস্ত বকেয়া পরিশোধ করুন (৮,৪০০ টাকা)
-                    </button>
+                    @php
+                    $totalDue = 0;
+                    foreach($taxPayments->where('payment_status', '!=', 'paid') as $payment) {
+                    $dueAmount = $payment->tax_amount;
+                    $penalty = $dueAmount * 0.2; // 20% penalty
+                    $totalDue += $dueAmount + $penalty;
+                    }
+                    @endphp
+                    @if($totalDue > 0)
+                    <a href="{{ route('tax.payment.form') }}" class="btn btn-primary-custom btn-lg">
+                        <i class="bi bi-credit-card me-2"></i>সমস্ত বকেয়া পরিশোধ করুন ({{ number_format($totalDue) }} টাকা)
+                    </a>
+                    @else
+                    <p class="text-success">অভিনন্দন! আপনার কোন বকেয়া নেই।</p>
+                    @endif
                 </div>
             </div>
         </div>
@@ -663,51 +695,35 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($taxPayments as $payment)
                             <tr>
-                                <td>১৫/১২/২০২ৄ</td>
-                                <td>২০২৪ সালের হোল্ডিং ট্যাক্স</td>
-                                <td>TXN123456789</td>
-                                <td>বিকাশ</td>
-                                <td>৫,০০০ টাকা</td>
-                                <td><span class="status-paid">পরিশোধিত</span></td>
-                                <td><button class="btn btn-sm btn-outline-success" onclick="downloadReceipt('TXN123456789')"><i class="bi bi-download"></i></button></td>
+                                <td>{{ $payment->created_at->format('d/m/Y') }}</td>
+                                <td>{{ $payment->created_at->format('Y') }} সালের হোল্ডিং ট্যাক্স</td>
+                                <td>TAX{{ $payment->id }}</td>
+                                <td>অনলাইন</td>
+                                <td>{{ number_format($payment->tax_amount) }} টাকা</td>
+                                <td>
+                                    @if($payment->payment_status == 'paid')
+                                    <span class="status-paid">পরিশোধিত</span>
+                                    @else
+                                    <span class="status-pending">অপেক্ষমাণ</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($payment->payment_status == 'paid')
+                                    <a href="{{ route('tax.invoice.download', $payment->id) }}" class="btn btn-sm btn-outline-success">
+                                        <i class="bi bi-download"></i>
+                                    </a>
+                                    @else
+                                    -
+                                    @endif
+                                </td>
                             </tr>
+                            @empty
                             <tr>
-                                <td>১০/১১/২০২ৄ</td>
-                                <td>অতিরিক্ত জমির কর</td>
-                                <td>TXN987654321</td>
-                                <td>নগদ</td>
-                                <td>২,৫০০ টাকা</td>
-                                <td><span class="status-pending">অপেক্ষমাণ</span></td>
-                                <td>-</td>
+                                <td colspan="7" class="text-center">কোন পেমেন্ট ইতিহাস নেই</td>
                             </tr>
-                            <tr>
-                                <td>০৮/১০/২০২৪</td>
-                                <td>ট্রেড লাইসেন্স ফি</td>
-                                <td>TXN456789123</td>
-                                <td>রকেট</td>
-                                <td>৭,৫০০ টাকা</td>
-                                <td><span class="status-paid">পরিশোধিত</span></td>
-                                <td><button class="btn btn-sm btn-outline-success" onclick="downloadReceipt('TXN456789123')"><i class="bi bi-download"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>২৫/০৯/২০২৪</td>
-                                <td>বিল্ডিং অনুমতি ফি</td>
-                                <td>TXN789123456</td>
-                                <td>ব্যাংক ট্রান্সফার</td>
-                                <td>১২,০০০ টাকা</td>
-                                <td><span class="status-paid">পরিশোধিত</span></td>
-                                <td><button class="btn btn-sm btn-outline-success" onclick="downloadReceipt('TXN789123456')"><i class="bi bi-download"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>১২/০৮/২০২৪</td>
-                                <td>পানি সংযোগ ফি</td>
-                                <td>TXN321654987</td>
-                                <td>বিকাশ</td>
-                                <td>৩,০০০ টাকা</td>
-                                <td><span class="status-paid">পরিশোধিত</span></td>
-                                <td><button class="btn btn-sm btn-outline-success" onclick="downloadReceipt('TXN321654987')"><i class="bi bi-download"></i></button></td>
-                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -767,30 +783,6 @@
         }, 2000);
     }
 
-    // Function to download receipt
-    function downloadReceipt(transactionId) {
-        // Show loading state
-        const btn = event.target.closest('button');
-        const originalHTML = btn.innerHTML;
-        btn.innerHTML = '<i class="bi bi-spinner-border"></i>';
-        btn.disabled = true;
-
-        // Simulate download
-        setTimeout(() => {
-            // Create a fake download link
-            const link = document.createElement('a');
-            link.href = '#'; // In real app, this would be the PDF URL
-            link.download = `receipt_${transactionId}.pdf`;
-            link.click();
-
-            // Show success message
-            alert(`রসিদ ডাউনলোড শুরু হয়েছে (${transactionId})`);
-
-            // Reset button
-            btn.innerHTML = originalHTML;
-            btn.disabled = false;
-        }, 1500);
-    }
 
     // Function to pay all dues
     function payAllDues() {

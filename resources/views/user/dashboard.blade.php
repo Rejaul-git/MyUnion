@@ -21,6 +21,9 @@
         </div>
 
         <div class="container-fluid p-4">
+            <!-- Session Status -->
+            <x-auth-session-status class="mb-4 alert alert-success" :status="session('success')" />
+
             <!-- Stats Cards -->
             <div class="row mb-4">
                 <div class="col-md-3 col-sm-6">
@@ -61,11 +64,11 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <h3 class="mb-1">{{ $users->profile->name_bn}}</h3>
+                                    <h3 class="mb-1">{{ $users->profile->name_bn?? $users->name}}</h3>
                                     <p class="mb-1 opacity-75">সদস্য, ইউনিয়ন পরিষদ</p>
                                     <p class="mb-0 opacity-75">
-                                        <i class="bi bi-envelope me-2"></i>{{ $users->profile->email}}
-                                        <i class="bi bi-telephone ms-3 me-2"></i> {{ $users->profile->mobile}}
+                                        <i class="bi bi-envelope me-2"></i>{{ $users->email}}
+                                        <i class="bi bi-telephone ms-3 me-2"></i> {{ $users->phone}}
                                     </p>
                                 </div>
                             </div>
@@ -88,11 +91,7 @@
                                 <div class="col-md-3 text-center">
                                     <div class="progress-circle-container">
                                         <div class="progress-circle" style="--progress: 216deg;" id="progressCircle">
-                                            <span class="progress-text" id="progressText">@if($users->profile->status == 'approved')
-                                                100%
-                                                @else
-                                                30%
-                                                @endif</span>
+                                            <span class="progress-text" id="progressText">@if(isset($users->profile) && $users->profile->status == 'approved') 100% @else 30% @endif</span>
                                         </div>
                                     </div>
                                 </div>

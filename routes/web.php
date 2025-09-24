@@ -21,25 +21,31 @@ Route::get('/birthcertificate', function () {
 Route::get('/deathcertificate', function () {
     return view('certificateForm.deathcertificate');
 })->name('deathcertificate');
-// taxFrom
-Route::get('/taxes', function () {
-    return view('tax.taxsSubmitForm');
-})->name('taxes');
-
+Route::get('/developmentConplaint', function () {
+    return view('development_complaint');
+})->name('developmentComplaint');
+Route::get('/socialAllowance', function () {
+    return view('social_allowance');
+})->name('social.allowance');
 
 Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/user/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard'); // [UserDashboardController::class,'index'] )
-    Route::get('/user/profile', function () {
-        return view('user.profileform');
-    })->name('user.profile');
+    Route::get('/user/profile', [ProfileFormController::class, 'create'])->name('user.profile');
     Route::post('/user/store', [ProfileFormController::class, 'store'])->name('store');
     Route::post('/birthcertificate/store', [App\Http\Controllers\BirthCertificateController::class, 'store'])->name('birthcertificate.store');
     Route::get('/birthcertificate/payment/{application_id}', [App\Http\Controllers\BirthCertificateController::class, 'paymentForm'])->name('payment.form');
     Route::post('/birthcertificate/process-payment', [App\Http\Controllers\BirthCertificateController::class, 'processPayment'])->name('birthcertificate.process.payment');
-    // tax-dashboard
-    Route::get('/user/tax', function () {
-        return view('user.taxPaymentDashboard');
-    })->name('tax.dashboard');
+    Route::get('/user/certificatesService',function (){return view('user.certificatesService');})->name('user.certificatesService');
+    //user management route
+    Route::get('/user/usermangment', [App\Http\Controllers\UserDashboardController::class, 'userMangment'])->name('user.usermangment');
+
+    // Tax payment routes
+    Route::get('/user/tax', [App\Http\Controllers\TaxController::class, 'dashboard'])->name('tax.dashboard');
+    Route::get('/user/tax/holding-number', [App\Http\Controllers\TaxController::class, 'showHoldingNumberForm'])->name('tax.holding.number.form');
+    Route::post('/user/tax/holding-number', [App\Http\Controllers\TaxController::class, 'storeHoldingNumber'])->name('tax.holding.number.store');
+    Route::get('/user/tax/payment', [App\Http\Controllers\TaxController::class, 'showPaymentForm'])->name('tax.payment.form');
+    Route::post('/user/tax/payment', [App\Http\Controllers\TaxController::class, 'processPayment'])->name('tax.payment.process');
+    Route::get('/user/tax/invoice/{id}', [App\Http\Controllers\TaxController::class, 'downloadInvoice'])->name('tax.invoice.download');
 });
 
 // Admin panel route
@@ -48,7 +54,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
 });
-
 
 
 

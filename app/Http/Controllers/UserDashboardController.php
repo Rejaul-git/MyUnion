@@ -14,4 +14,11 @@ class UserDashboardController extends Controller
         $users = User::with('profile')->find(Auth::id());
         return view('user.dashboard', compact('users'));
     }
+
+    public function userMangment()
+    {
+        $users = Auth::user();
+        $users->load('profile');
+        return view('user.profilemanagement', compact('users'));
+    }
 }
